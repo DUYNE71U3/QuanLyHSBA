@@ -1,0 +1,41 @@
+﻿@model QuanLyHSBA.Models.Medicine
+
+@{
+    ViewData["Title"] = "Display";
+}
+
+<h1>Display</h1>
+
+<div>
+    <h4>Medicine</h4>
+    <hr />
+
+    <!--Chèn ảnh vào phần detail-->
+
+    <aside class="col-lg-6">
+        <div class="mb-3 d-flex justify-content-center">
+            <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="@Html.DisplayFor(model => model.ImageUrl)">
+                <img style="max-width: 230px; max-height: 300px; margin: auto;" class="rounded-4 fit" src="@Html.DisplayFor(model => model.ImageUrl)" />
+            </a>
+        </div>
+    </aside>
+
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.origin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.origin)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,7 +1,7 @@
 ﻿@page
 @model LogoutModel
 @{
-    ViewData["Title"] = "Log out";
+    ViewData["Title"] = "Bạn có muốn đăng xuất?";
 }
 
 <header>
@@ -9,9 +9,11 @@
     @{
         if (User.Identity?.IsAuthenticated ?? false)
         {
+            <center>
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                <button type="submit" class="btn btn-outline-dark">Click here to Logout</button>
             </form>
+            </center>
         }
         else
         {

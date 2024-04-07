@@ -1,0 +1,66 @@
+﻿@model IEnumerable<QuanLyHSBA.Models.MedicalRecord>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Hồ Sơ Bệnh Án</h1>
+
+<p>
+    <a asp-action="Add"><button class="btn btn-outline-dark">Create New</button></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Symptom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DischargeDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorNote)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Symptom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DischargeDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorNote)
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id"><button class="btn btn-primary">Edit</button></a> |
+                    <a asp-action="Display" asp-route-id="@item.Id"><button class="btn btn-warning">Details</button></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
