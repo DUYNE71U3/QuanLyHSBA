@@ -1,0 +1,52 @@
+﻿@model QuanLyHSBA.Models.Doctor
+
+@{
+    ViewData["Title"] = "Display";
+}
+
+<h1>Display</h1>
+
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <!--Chèn ảnh vào phần detail-->
+
+    <aside class="col-lg-6">
+        <div class="mb-3 d-flex justify-content-center">
+            <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="@Html.DisplayFor(model => model.ImageUrl)">
+                <img style="max-width: 230px; max-height: 300px; margin: auto;" class="rounded-4 fit" src="@Html.DisplayFor(model => model.ImageUrl)" />
+            </a>
+        </div>
+    </aside>
+
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneContact)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneContact)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Info)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Specialty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Specialty.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><button class="btn btn-outline-dark">Edit</button></a> |
+    <a asp-action="Index"><button class="btn btn-outline-dark">Back to List</button></a>
+</div>
