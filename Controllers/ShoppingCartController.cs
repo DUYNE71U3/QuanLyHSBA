@@ -100,19 +100,6 @@ namespace QuanLyHSBA.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IActionResult UpdateCart(int medicineId, int quantity)
-        {
-            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
-            var cartItem = cart.Items.FirstOrDefault(item => item.MedicineId == medicineId);
-            if (cartItem != null)
-            {
-                cartItem.Quantity = quantity;
-            }
-            HttpContext.Session.SetObjectAsJson("Cart", cart);
-
-            return RedirectToAction("Index");
-        }
 
         //plus function
         public IActionResult Plus(int medicineId)
