@@ -94,6 +94,7 @@ namespace QuanLyHSBA.Areas.Admin.Controllers
                 // Cập nhật các thông tin khác của sản phẩm
                 existingMedicine.Name = medicine.Name;
                 existingMedicine.origin = medicine.origin;
+                existingMedicine.Price = medicine.Price;
                 existingMedicine.ImageUrl = medicine.ImageUrl;
                 await _medicineRepository.UpdateAsync(existingMedicine);
                 return RedirectToAction(nameof(Index));

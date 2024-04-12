@@ -1,0 +1,58 @@
+﻿@model ShoppingCart
+
+<h2>Your Cart</h2>
+
+<form id="cartForm" asp-area="" asp-controller="ShoppingCart" asp-action="UpdateCart">
+    <table class="table">
+        <tr>
+            <th>Medicine</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <input type="number" class="quantityInput" name="quantity" value="@item.Quantity" min="1" step="1" data-medicineid="@item.MedicineId">
+                </td>
+                <td>
+                     @item.Price
+                </td>
+                <td class="totalPrice">
+                    @(item.Price * item.Quantity)
+                 </td>
+                <td>
+                    <a asp-action="RemoveFromCart" asp-route-MedicineId="@item.MedicineId">Remove</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <button type="submit" class="btn btn-outline-dark mx-1">Update Cart</button>
+</form>
+
+<p>
+<a asp asp-area="" asp-controller="ShoppingCart" asp-action="Checkout"><button class="btn btn-outline-dark mx-1">Check Out</button></a>
+<a asp asp-area="" asp-controller="Home" asp-action="Index"><button class="btn btn-outline-dark mx-1">Back to List</button></a>
+</p>
+
+<script>
+    document.querySelectorAll('.quantityInput').forEach(function (input) {
+        input.addEventListener('change', function () {
+            updateTotal(this);
+        });
+    });
+
+    function updateTotal(input) {
+        var quantity = input.value;
+        var priceElement = input.parentNode.nextElementSibling; // Đây là ô chứa giá tiền
+        var totalPriceElement = input.parentNode.nextElementSibling.nextElementSibling; // Đây là ô chứa tổng tiền
+
+        var price = parseFloat(priceElement.textContent.trim()); // Lấy giá trị và chuyển thành số
+
+        var totalPrice = price * quantity;
+        totalPriceElement.textContent = totalPrice;
+    }
+</script>

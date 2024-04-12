@@ -339,6 +339,9 @@ namespace QuanLyHSBA.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("origin")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -368,6 +371,68 @@ namespace QuanLyHSBA.Migrations
                     b.HasIndex("MedicineId");
 
                     b.ToTable("MedicinesImages");
+                });
+
+            modelBuilder.Entity("QuanLyHSBA.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ShippingAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("QuanLyHSBA.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("QuanLyHSBA.Models.Patient", b =>
@@ -541,6 +606,36 @@ namespace QuanLyHSBA.Migrations
                     b.Navigation("Medicine");
                 });
 
+            modelBuilder.Entity("QuanLyHSBA.Models.Order", b =>
+                {
+                    b.HasOne("QuanLyHSBA.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("QuanLyHSBA.Models.OrderDetail", b =>
+                {
+                    b.HasOne("QuanLyHSBA.Models.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuanLyHSBA.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("QuanLyHSBA.Models.PatientImage", b =>
                 {
                     b.HasOne("QuanLyHSBA.Models.Patient", "patient")
@@ -560,6 +655,11 @@ namespace QuanLyHSBA.Migrations
             modelBuilder.Entity("QuanLyHSBA.Models.Medicine", b =>
                 {
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("QuanLyHSBA.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("QuanLyHSBA.Models.Patient", b =>

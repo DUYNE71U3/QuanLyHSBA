@@ -16,5 +16,7 @@ namespace QuanLyHSBA.Models
         public DbSet<DoctorImage> DoctorImages { get; set; }
         public DbSet<MedicineImage> MedicinesImages { get; set; }
         public DbSet<PatientImage> PatientImages { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -46,9 +46,9 @@
                     <img src="@item.ImageUrl" style="width: 180px; height: 200px" />
                 </td>
                 <td>
-                    <a asp-action="Update" asp-route-id="@item.Id"><button class="btn btn-primary">Edit</button></a> |
-                    <a asp-action="Display" asp-route-id="@item.Id"><button class="btn btn-warning">Details</button></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Delete</button></a>
+                    <a asp-action="Update" asp-route-id="@item.Id"><button class="btn btn-outline-dark"><i class="bi bi-pencil-square"></i></button></a> |
+                    <a asp-action="Display" asp-route-id="@item.Id"><button class="btn btn-outline-dark"><i class="bi bi-list"></i></button></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-outline-dark"><i class="bi bi-trash"></i></button></a>
                 </td>
             </tr>
         }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using QuanLyHSBA.Models;
+using QuanLyHSBA.Repositories;
 using System.Diagnostics;
 
 namespace QuanLyHSBA.Controllers
@@ -7,15 +8,17 @@ namespace QuanLyHSBA.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMedicineRepository _medicineRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMedicineRepository medicineRepository)
         {
-            _logger = logger;
+            _medicineRepository = medicineRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var medicines = await _medicineRepository.GetAllAsync();
+            return View(medicines);
         }
 
         public IActionResult Privacy()
