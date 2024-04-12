@@ -100,7 +100,6 @@ namespace QuanLyHSBA.Controllers
             return RedirectToAction("Index");
         }
 
-
         //plus function
         public IActionResult Plus(int medicineId)
         {
