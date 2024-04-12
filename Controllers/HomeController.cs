@@ -9,16 +9,24 @@ namespace QuanLyHSBA.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMedicineRepository _medicineRepository;
+        private readonly IMedicalRecordRepository _medicalRecordRepository;
 
-        public HomeController(IMedicineRepository medicineRepository)
+        public HomeController(IMedicineRepository medicineRepository, IMedicalRecordRepository medicalRecordRepository)
         {
             _medicineRepository = medicineRepository;
+            _medicalRecordRepository = medicalRecordRepository;
         }
 
         public async Task<IActionResult> Index()
         {
             var medicines = await _medicineRepository.GetAllAsync();
             return View(medicines);
+        }
+
+        public async Task<IActionResult> HSBA()
+        {
+            var medicalrecords = await _medicalRecordRepository.GetAllAsync();
+            return View(medicalrecords);
         }
 
         public IActionResult Privacy()

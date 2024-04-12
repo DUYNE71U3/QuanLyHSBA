@@ -32,18 +32,15 @@
                 <label asp-for="Images" class="control-label"></label>
                 <input type="file" asp-for="ImageUrl" class="form-control" id="imageInput" />
             </div>
-            <div class="form-group">
+            <div class="form-group mt-xxl-4">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
     <div class="col-8">
         <img src="@Model.ImageUrl" alt="Product Image" style="max-width:200px;" id="previewImage" />
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 <script>

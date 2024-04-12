@@ -43,16 +43,14 @@
                 <input asp-for="DoctorNote" class="form-control" />
                 <span asp-validation-for="DoctorNote" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-xxl-4">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index"><button class="btn btn-outline-dark">Back to List</button></a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

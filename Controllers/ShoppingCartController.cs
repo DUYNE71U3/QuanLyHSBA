@@ -113,5 +113,44 @@ namespace QuanLyHSBA.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //plus function
+        public IActionResult Plus(int medicineId)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
+            var cartItem = cart.Items.FirstOrDefault(item => item.MedicineId == medicineId);
+
+            if (cartItem != null)
+            {
+                cartItem.Quantity++; // Increment quantity
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+
+            return RedirectToAction("Index");
+        }
+        //minus function
+        public IActionResult Minus(int medicineId)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
+            var cartItem = cart.Items.FirstOrDefault(item => item.MedicineId == medicineId);
+
+            if (cartItem != null)
+            {
+                if (cartItem.Quantity > 1)
+                {
+                    cartItem.Quantity--; // Decrement quantity if greater than 1
+                }
+                else
+                {
+                    // Optionally remove the item from cart if quantity reaches 0
+                    cart.RemoveItem(medicineId);
+                }
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+
+            return RedirectToAction("Index");
+        }
     }
 }

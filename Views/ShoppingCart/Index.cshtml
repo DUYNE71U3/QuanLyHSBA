@@ -1,5 +1,7 @@
 ﻿@model ShoppingCart
 
+
+
 <h2>Your Cart</h2>
 
 <form id="cartForm" asp-area="" asp-controller="ShoppingCart" asp-action="UpdateCart">
@@ -9,6 +11,7 @@
             <th>Quantity</th>
             <th>Price</th>
             <th>Total</th>
+            <th>Option</th>
             <th>Action</th>
         </tr>
         @foreach (var item in Model.Items)
@@ -16,26 +19,35 @@
             <tr>
                 <td>@item.Name</td>
                 <td>
-                    <input type="number" class="quantityInput" name="quantity" value="@item.Quantity" min="1" step="1" data-medicineid="@item.MedicineId">
+                    @item.Quantity
                 </td>
                 <td>
-                     @item.Price
+                    @item.Price
                 </td>
                 <td class="totalPrice">
                     @(item.Price * item.Quantity)
-                 </td>
+                </td>
                 <td>
-                    <a asp-action="RemoveFromCart" asp-route-MedicineId="@item.MedicineId">Remove</a>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-action="plus" asp-route-MedicineId="@item.MedicineId" class="btn btn-outline-dark bg-gradient py-2">
+                            <i class="bi bi-plus-square"></i>
+                        </a> &nbsp;
+                        <a asp-action="minus" asp-route-MedicineId="@item.MedicineId" class="btn btn-outline-dark bg-gradient py-2">
+                            <i class="bi bi-dash-square"></i>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark bg-gradient py-2" asp-action="RemoveFromCart" asp-route-MedicineId="@item.MedicineId">Remove</a>
                 </td>
             </tr>
         }
     </table>
-    <button type="submit" class="btn btn-outline-dark mx-1">Update Cart</button>
 </form>
 
 <p>
-<a asp asp-area="" asp-controller="ShoppingCart" asp-action="Checkout"><button class="btn btn-outline-dark mx-1">Check Out</button></a>
-<a asp asp-area="" asp-controller="Home" asp-action="Index"><button class="btn btn-outline-dark mx-1">Back to List</button></a>
+    <a asp asp-area="" asp-controller="ShoppingCart" asp-action="Checkout"><button class="btn btn-outline-dark mx-1">Check Out</button></a>
+    <a asp asp-area="" asp-controller="Home" asp-action="Index"><button class="btn btn-outline-dark mx-1">Back to List</button></a>
 </p>
 
 <script>
